@@ -19,9 +19,7 @@ const Deployer = require('forgae-lib').Deployer;
 const deploy = async (network, privateKey, compiler) => {
     let deployer = new Deployer(network, privateKey, compiler)
 
-    await deployer.deploy("./contracts/waellet-oracle-test.aes")
-    // await deployer.deploy("./contracts/token-registry.aes")
-    // await deployer.deploy("./contracts/waellet-tip.aes")
+    await deployer.deploy("./contracts/token-registry.aes")
 };
 
 module.exports = {

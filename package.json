@@ -1,34 +1,16 @@
 {
-  "name": "waellet-contracts",
+  "name": "token-registry",
   "version": "0.0.1",
-  "description": "These are the smart contracts used by waellet browser extension",
+  "description": "AEX-9 Token Registry Contract",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/**/*.js --timeout 0 --exit",
+    "aetest": "aeproject test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/waellet/waellet-contracts.git"
-  },
-  "keywords": [
-    "waellet",
-    "browser",
-    "aeternity",
-    "smart",
-    "contracts",
-    "sophia"
-  ],
-  "author": "Milen Radkov <milenradkov@me.com> (http://mradkov.com)",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/waellet/waellet-contracts/issues"
-  },
-  "homepage": "https://github.com/waellet/waellet-contracts#readme",
   "dependencies": {
-    "@aeternity/aepp-sdk": "6.0.0",
-    "aeproject-lib": "1.0.1",
-    "blake2b": "^2.1.3",
-    "forgae-lib": "1.0.4",
-    "yarn": "1.15.2"
+    "@aeternity/aepp-sdk": "^7.5.0",
+    "aeproject-lib": "^2.2.0"
   }
 }
