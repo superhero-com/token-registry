@@ -17,6 +17,7 @@
 const {Universal, MemoryAccount, Node} = require('@aeternity/aepp-sdk');
 
 const TOKEN_REGISTRY_CONTRACT = utils.readFileRelative('./contracts/token-registry.aes', 'utf-8');
+const TOKEN_REGISTRY_CONTRACT_INTERFACE = utils.readFileRelative('./contracts/token-registry-interface.aes', 'utf-8');
 
 const config = {
   url: 'http://localhost:3001/',
@@ -45,5 +46,11 @@ describe('AEX-9 Token Registry Contract', () => {
     contract = await client.getContractInstance(TOKEN_REGISTRY_CONTRACT);
     const init = await contract.methods.init();
     assert.equal(init.result.returnType, 'ok');
+  });
+
+  it('Token Registry Interface', async () => {
+    const contractInterface = await client.getContractInstance(TOKEN_REGISTRY_CONTRACT_INTERFACE, {contractAddress: contract.deployInfo.address});
+    const state = await contractInterface.methods.get_state();
+    assert.equal(state.result.returnType, 'ok');
   });
 });
