@@ -1,4 +1,6 @@
-contract Token =
+@compiler >= 6
+
+contract interface Token =
   record meta_info =
     { name : string
     , symbol : string
@@ -6,7 +8,7 @@ contract Token =
 
   entrypoint meta_info : () => meta_info
 
-contract TokenRegistry =
+main contract TokenRegistry =
   type state = map(Token, Token.meta_info)
 
   stateful entrypoint init() : state = {}

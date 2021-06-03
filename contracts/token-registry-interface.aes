@@ -1,10 +1,10 @@
-contract Token =
+contract interface Token =
   record meta_info =
     { name : string
     , symbol : string
     , decimals : int }
 
-contract TokenRegistry =
+main contract TokenRegistry =
   type state = map(Token, Token.meta_info)
   stateful entrypoint add_token : (Token) => unit
   entrypoint get_state : () => state
