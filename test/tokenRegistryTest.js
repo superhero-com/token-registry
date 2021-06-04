@@ -14,10 +14,16 @@
  *  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  *  PERFORMANCE OF THIS SOFTWARE.
  */
+
+const fs = require('fs');
+const assert = require('chai').assert
+
+const { defaultWallets: wallets } = require('../config/wallets.json');
+
 const {Universal, MemoryAccount, Node} = require('@aeternity/aepp-sdk');
 
-const TOKEN_REGISTRY_CONTRACT = utils.readFileRelative('./contracts/token-registry.aes', 'utf-8');
-const TOKEN_REGISTRY_CONTRACT_INTERFACE = utils.readFileRelative('./contracts/token-registry-interface.aes', 'utf-8');
+const TOKEN_REGISTRY_CONTRACT = fs.readFileSync('./contracts/token-registry.aes', 'utf-8');
+const TOKEN_REGISTRY_CONTRACT_INTERFACE = fs.readFileSync('./contracts/token-registry-interface.aes', 'utf-8');
 
 const config = {
   url: 'http://localhost:3001/',
