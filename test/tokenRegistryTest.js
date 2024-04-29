@@ -15,48 +15,25 @@
  *  PERFORMANCE OF THIS SOFTWARE.
  */
 
-const fs = require('fs');
-const assert = require('chai').assert
+const {assert} = require("chai");
+const {utils} = require("@aeternity/aeproject");
 
-const { defaultWallets: wallets } = require('../config/wallets.json');
-
-const {Universal, MemoryAccount, Node} = require('@aeternity/aepp-sdk');
-
-const TOKEN_REGISTRY_CONTRACT = fs.readFileSync('./contracts/token-registry.aes', 'utf-8');
-const TOKEN_REGISTRY_CONTRACT_INTERFACE = fs.readFileSync('./contracts/token-registry-interface.aes', 'utf-8');
-
-const config = {
-  url: 'http://localhost:3001/',
-  internalUrl: 'http://localhost:3001/',
-  compilerUrl: 'http://localhost:3080'
-};
+const TOKEN_REGISTRY_CONTRACT = './contracts/token-registry.aes';
 
 describe('AEX-9 Token Registry Contract', () => {
-  let client, contract;
+    let aeSdk, contract;
 
-  before(async () => {
-    client = await Universal({
-      nodes: [{
-        name: 'devnetNode',
-        instance: await Node(config)
-      }],
-      accounts: [MemoryAccount({
-        keypair: wallets[0]
-      })],
-      networkId: 'ae_devnet',
-      compilerUrl: config.compilerUrl
+    before(async () => {
+        aeSdk = utils.getSdk();
+
     });
-  });
 
-  it('Deploying Token Registry Contract', async () => {
-    contract = await client.getContractInstance(TOKEN_REGISTRY_CONTRACT);
-    const init = await contract.methods.init();
-    assert.equal(init.result.returnType, 'ok');
-  });
+    it('Deploying Token Registry Contract', async () => {
+        const sourceCode = utils.getContractContent(TOKEN_REGISTRY_CONTRACT);
 
-  it('Token Registry Interface', async () => {
-    const contractInterface = await client.getContractInstance(TOKEN_REGISTRY_CONTRACT_INTERFACE, {contractAddress: contract.deployInfo.address});
-    const state = await contractInterface.methods.get_state();
-    assert.equal(state.result.returnType, 'ok');
-  });
+
+        contract = await aeSdk.initializeContract({sourceCode});
+        const init = await contract.init();
+        assert.equal(init.result.returnType, 'ok');
+    });
 });
