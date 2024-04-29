@@ -1,0 +1,82 @@
+[
+  {
+    "contract": {
+      "functions": [
+        {
+          "arguments": [],
+          "name": "meta_info",
+          "payable": false,
+          "returns": "Token.meta_info",
+          "stateful": false
+        }
+      ],
+      "kind": "contract_interface",
+      "name": "Token",
+      "payable": false,
+      "typedefs": [
+        {
+          "name": "meta_info",
+          "typedef": {
+            "record": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "symbol",
+                "type": "string"
+              },
+              {
+                "name": "decimals",
+                "type": "int"
+              }
+            ]
+          },
+          "vars": []
+        }
+      ]
+    }
+  },
+  {
+    "contract": {
+      "functions": [
+        {
+          "arguments": [],
+          "name": "init",
+          "payable": false,
+          "returns": "TokenRegistry.state",
+          "stateful": true
+        },
+        {
+          "arguments": [
+            {
+              "name": "token",
+              "type": "Token"
+            }
+          ],
+          "name": "add_token",
+          "payable": false,
+          "returns": "unit",
+          "stateful": true
+        },
+        {
+          "arguments": [],
+          "name": "get_state",
+          "payable": false,
+          "returns": "TokenRegistry.state",
+          "stateful": false
+        }
+      ],
+      "kind": "contract_main",
+      "name": "TokenRegistry",
+      "payable": false,
+      "state": {
+        "map": [
+          "Token",
+          "Token.meta_info"
+        ]
+      },
+      "typedefs": []
+    }
+  }
+]
